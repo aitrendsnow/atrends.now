@@ -51,7 +51,7 @@ export default function App() {
       {/* Profile Section */}
       <div className="profile-section">
         <img
-          src="/profile-image.webp"
+          src="/aitrends.now/profile-image.webp"
           alt="Profile picture of aitrends.now"
           className="profile-image"
           loading="lazy"
