@@ -1,6 +1,6 @@
 # aitrends.now
 
-![aitrends.now Logo](/profile-image.webp)
+![aitrends.now Logo](/public/profile-image.webp)
 
 Welcome to **aitrends.now**, a platform dedicated to tech enthusiasts who share a passion for technology, innovation, and the future of artificial intelligence. This repository hosts the source code for our website, designed to provide an exceptional user experience and seamless access to our content.
 
@@ -14,7 +14,7 @@ Welcome to **aitrends.now**, a platform dedicated to tech enthusiasts who share 
 
 ## 🖼️ Preview
 
-![Screenshot](/images/social-share.webp)
+![Screenshot](/public/images/social-share.webp)
 
 ## 🛠️ Tech Stack
 
