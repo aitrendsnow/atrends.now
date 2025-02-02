@@ -1,6 +1,6 @@
 # aitrends.now
 
-![aitrends.now Logo](./public/images/social-share.jpg)
+![aitrends.now Logo](/aitrends.now/images/social-share.webp)
 
 Welcome to **aitrends.now**, a platform dedicated to tech enthusiasts who share a passion for technology, innovation, and the future of artificial intelligence. This repository hosts the source code for our website, designed to provide an exceptional user experience and seamless access to our content.
 
@@ -14,7 +14,7 @@ Welcome to **aitrends.now**, a platform dedicated to tech enthusiasts who share 
 
 ## 🖼️ Preview
 
-![Screenshot](./public/images/screenshot.png)
+![Screenshot](/aitrends.now/images/social-share.webp)
 
 ## 🛠️ Tech Stack
 
@@ -40,7 +40,7 @@ Welcome to **aitrends.now**, a platform dedicated to tech enthusiasts who share 
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/yourusername/aitrends.now.git
+   git clone https://github.com/aitrendsnow/aitrends.now.git
    ```
 2. Navigate to the project directory:
    ```bash
