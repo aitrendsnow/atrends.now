@@ -1,6 +1,7 @@
 # aitrends.now
 
-![aitrends.now Logo](/public/profile-image.webp)
+![aitrends.now Logo]
+<img src="/public/profile-image.webp" alt="aitrends.now Logo" width="200" height="200">
 
 Welcome to **aitrends.now**, a platform dedicated to tech enthusiasts who share a passion for technology, innovation, and the future of artificial intelligence. This repository hosts the source code for our website, designed to provide an exceptional user experience and seamless access to our content.
 
