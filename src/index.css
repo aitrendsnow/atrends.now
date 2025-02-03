@@ -1,17 +1,16 @@
 @import url("https://fonts.googleapis.com/css2?family=Google+Sans:wght@400;700&display=swap");
 
-html {
-  font-size: 16px;
-}
-
+html,
 body {
-  font-family: "Google Sans", sans-serif;
   height: 100%;
   margin: 0;
+  padding: 0;
   display: flex;
   flex-direction: column;
-  font-size: 1rem;
-  line-height: 1.6;
+  background-color: var(--background-color);
+  color: var(--text-color);
+  transition: background-color 0.3s, color 0.3s;
+  overflow-y: auto; /* Allows slight scrolling */
 }
 
 :root {
@@ -20,7 +19,7 @@ body {
   color-scheme: light dark;
   --background-color: #ffffff;
   --text-color: #000000;
-  --footer-bg: #f8f9fa;
+  --footer-bg: transparent;
   --footer-text: #6c757d;
   --button-bg: #e9ecef;
   --button-text: #000;
@@ -30,61 +29,58 @@ body {
 html[data-theme="dark"] {
   --background-color: #242424;
   --text-color: rgba(255, 255, 255, 0.87);
-  --footer-bg: #1a1a1a;
+  --footer-bg: transparent;
   --footer-text: rgba(255, 255, 255, 0.5);
   --button-bg: #3a3a4c;
   --button-text: rgba(255, 255, 255, 0.87);
   --button-hover-border: #535bf2;
 }
 
-html,
-body {
-  background-color: var(--background-color);
-  color: var(--text-color);
-  transition: background-color 0.3s, color 0.3s;
-}
-
 #root {
   display: flex;
   flex-direction: column;
-  min-height: 100dvh;
+  min-height: 100vh;
 }
 
-.container {
-  flex: 1;
+.main-content {
+  flex-grow: 1;
   display: flex;
   flex-direction: column;
-  align-items: center;
   justify-content: center;
+  align-items: center;
   text-align: center;
   padding: 20px;
+  min-height: 85vh;
+  margin-bottom: auto;
 }
 
-footer {
-  position: sticky; /* Ensures it always stays at the bottom */
-  bottom: 0;
-  left: 0;
+.footer {
   width: 100%;
   text-align: center;
-  padding: 10px 0 !important;
-  background-color: transparent;
+  padding: 10px !important;
+  background-color: var(--footer-bg);
   color: var(--footer-text);
-  font-size: 0.675rem;
+  font-size: clamp(0.6rem, 2.5vw, 0.875rem);
   display: flex;
   justify-content: center;
   align-items: center;
-}
-@media (min-width: 768px) {
-  .links-section {
-    margin-bottom: 5rem; /* Adds space only for desktop */
-  }
+  height: 50px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  position: relative;
+  bottom: 0;
+  max-width: 95%;
+  margin: 0 auto;
 }
 
+/* General Styles */
 a {
   font-weight: 500;
   color: #646cff;
   text-decoration: inherit;
 }
+
 a:hover {
   color: #535bf2;
 }
@@ -118,6 +114,7 @@ button {
   cursor: pointer;
   transition: background-color 0.3s, color 0.3s;
 }
+
 button:hover {
   background-color: var(--button-hover-border);
 }
@@ -125,7 +122,7 @@ button:hover {
 /* Link Cards */
 .link-card {
   display: flex;
-  align-items: center; /* Vertically align items */
+  align-items: center;
   padding: 1rem;
   margin-bottom: 1rem;
   background-color: var(--button-bg);
@@ -136,35 +133,35 @@ button:hover {
   font-size: 1rem;
   font-weight: 500;
   position: relative;
-  gap: 0.8rem; /* Space between icon and text */
+  gap: 0.8rem;
 }
 
 .link-card a {
-  display: flex; /* Ensure icon and text align properly */
+  display: flex;
   align-items: center;
-  text-decoration: none; /* Remove underline */
-  color: inherit; /* Inherit parent color */
-  flex: 1; /* Make the link take full width */
+  text-decoration: none;
+  color: inherit;
+  flex: 1;
 }
 
 .link-card svg,
 .link-card i {
-  width: 24px; /* Standardize icon size */
+  width: 24px;
   height: 24px;
-  flex-shrink: 0; /* Prevent icon resizing */
-  margin-right: 0.8rem; /* Add consistent space between icon and text */
+  flex-shrink: 0;
+  margin-right: 0.8rem;
 }
 
 .link-card span {
-  flex: 1; /* Ensure text takes up remaining space */
+  flex: 1;
   display: flex;
-  align-items: center; /* Vertically align text with the icon */
+  align-items: center;
 }
 
 .link-options {
-  position: absolute; /* Align three dots independently */
-  right: 1rem; /* Position to the far right */
-  top: 50%; /* Vertically center */
+  position: absolute;
+  right: 1rem;
+  top: 50%;
   transform: translateY(-50%);
   font-size: 1.2rem;
   color: var(--footer-text);
@@ -183,11 +180,11 @@ button:hover {
 @keyframes pulseEffect {
   0% {
     transform: scale(1);
-    box-shadow: 0 0 6px rgba(100, 108, 255, 0.3); /* Soft glow */
+    box-shadow: 0 0 6px rgba(100, 108, 255, 0.3);
   }
   50% {
-    transform: scale(1.02); /* Subtle expansion */
-    box-shadow: 0 0 12px rgba(100, 108, 255, 0.4); /* Slightly stronger glow */
+    transform: scale(1.02);
+    box-shadow: 0 0 12px rgba(100, 108, 255, 0.4);
   }
   100% {
     transform: scale(1);
@@ -196,34 +193,35 @@ button:hover {
 }
 
 .theme-switcher-btn {
-  background: none; /* No background */
-  border: none; /* No border */
-  padding: 0; /* Remove padding */
-  cursor: pointer; /* Show pointer cursor */
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
 .theme-switcher-btn i {
-  font-size: 1.5rem; /* Adjust icon size */
-  color: var(--text-color); /* Match text color */
+  font-size: 1.5rem;
+  color: var(--text-color);
 }
 
 .theme-switcher-btn:hover {
-  background: none !important; /* Prevent any background on hover */
-  outline: none; /* Remove focus outline */
-  box-shadow: none; /* No hover shadow */
+  background: none !important;
+  outline: none;
+  box-shadow: none;
 }
 
 .theme-switcher-btn:focus {
-  outline: none; /* Remove focus outline when tabbing */
-  box-shadow: none; /* Prevent focus shadow */
+  outline: none;
+  box-shadow: none;
 }
 
 .profile-section {
   margin-bottom: 2rem;
 }
+
 .profile-image {
   width: 100px;
   height: 100px;
@@ -231,13 +229,14 @@ button:hover {
   border: 3px solid var(--text-color);
   object-fit: cover;
   box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.2);
-  margin-bottom: 1rem; /* Adds space below the profile image */
+  margin-bottom: 1rem;
 }
 
 .profile-username {
   font-size: 1.5rem;
   font-weight: 700;
 }
+
 .profile-description {
   font-size: 1rem;
   color: var(--footer-text);
