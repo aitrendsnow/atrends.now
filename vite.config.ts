@@ -1,29 +1,28 @@
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 import { ViteMinifyPlugin } from 'vite-plugin-minify';
+import { createHtmlPlugin } from 'vite-plugin-html'; // ✅ Correct way to inline critical CSS
 
-// Async function to load the PurgeCSS plugin
-async function loadPostCssPlugins() {
-  const purgecss = (await import('postcss-purgecss')).default;
-
-  return [
-    purgecss({
-      content: [
-        './index.html',
-        './src/**/*.{ts,tsx,js,jsx,html}',
-      ],
-      defaultExtractor: (content: string) =>
-        content.match(/[\w-/:]+(?<!:)/g) || [],
+export default defineConfig({
+  plugins: [
+    react(),
+    ViteMinifyPlugin(),
+    createHtmlPlugin({
+      minify: true, // Minifies HTML
+      inject: {
+        data: {
+          criticalCSS: `<style>
+            /* Manually include critical CSS here if necessary */
+          </style>`,
+        },
+      },
     }),
-  ];
-}
-
-export default defineConfig(async () => ({
-  plugins: [react(), ViteMinifyPlugin()],
+  ],
   css: {
-    postcss: {
-      plugins: await loadPostCssPlugins(),
-    },
+    postcss: {},
+  },
+  build: {
+    rollupOptions: {},
   },
   base: 'https://aitrendsnow.github.io/aitrends.now/',
-}));
+});
