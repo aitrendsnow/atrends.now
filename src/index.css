@@ -137,7 +137,6 @@ button:hover {
   font-weight: 500;
   position: relative;
   gap: 0.8rem; /* Space between icon and text */
-  padding-bottom: 10rem;
 }
 
 .link-card a {
