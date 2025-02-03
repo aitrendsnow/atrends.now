@@ -61,8 +61,8 @@ body {
 }
 
 footer {
-  position: fixed; /* Ensures it always stays at the bottom */
-  top: 10px;
+  position: sticky; /* Ensures it always stays at the bottom */
+  padding-top: 10px;
   bottom: 0;
   left: 0;
   width: 100%;
