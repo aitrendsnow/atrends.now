@@ -5,12 +5,13 @@ body {
   height: 100%;
   margin: 0;
   padding: 0;
-  display: flex;
-  flex-direction: column;
+  font-family: "Google Sans", Inter, system-ui, Avenir, Helvetica, Arial,
+    sans-serif;
   background-color: var(--background-color);
   color: var(--text-color);
   transition: background-color 0.3s, color 0.3s;
-  overflow-y: auto; /* Allows slight scrolling */
+  display: flex;
+  flex-direction: column;
 }
 
 :root {
@@ -42,36 +43,41 @@ html[data-theme="dark"] {
   min-height: 100vh;
 }
 
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
 .main-content {
-  flex-grow: 1;
+  flex: 1;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   text-align: center;
   padding: 20px;
-  min-height: 85vh;
-  margin-bottom: auto;
 }
 
-.footer {
-  width: 100%;
-  text-align: center;
-  padding: 10px !important;
+/* Updated footer styles */
+footer {
   background-color: var(--footer-bg);
   color: var(--footer-text);
-  font-size: clamp(0.6rem, 2.5vw, 0.875rem);
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  width: 100%;
   height: 50px;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  position: relative;
+  position: fixed; /* Always sticks to the bottom of the screen */
   bottom: 0;
-  max-width: 95%;
-  margin: 0 auto;
+  left: 0;
+  display: flex;
+  justify-content: center; /* Horizontally centers the text */
+  align-items: center; /* Vertically centers the text */
+  text-align: center;
+  padding: 0 20px; /* Ensures padding for text */
+  font-size: clamp(0.6rem, 2.5vw, 0.875rem); /* Dynamic text size */
+  box-sizing: border-box;
+  white-space: nowrap; /* Ensures text stays on one line */
+  overflow: hidden; /* Hides overflowed text */
+  text-overflow: ellipsis; /* Adds ellipsis (...) for overflowed text */
 }
 
 /* General Styles */
