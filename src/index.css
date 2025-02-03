@@ -61,6 +61,7 @@ body {
 }
 
 footer {
+  position: fixed; /* Ensures it always stays at the bottom */
   top: 10px;
   bottom: 0;
   left: 0;
