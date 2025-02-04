@@ -3,6 +3,7 @@ import Footer from "./components/Footer";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap-icons/font/bootstrap-icons.css";
 import "./index.css";
+import EbookDownload from "./components/EbookDownload";
 
 export default function App() {
   const [theme, setTheme] = useState(() => {
@@ -150,26 +151,31 @@ export default function App() {
             </span>
           </div>
 
-          <div className="link-card special">
+          <div className="link-card">
             <a
-              href="https://aitrends.now/ebook"
-              target="_blank"
-              rel="noopener noreferrer"
+              href="#"
+              onClick={(e) => {
+                e.preventDefault(); // Prevent default anchor behavior
+                document.getElementById("ebook-download-trigger")?.click(); // Trigger modal
+              }}
             >
               <i className="bi bi-book"></i>
-              <span>Download your ebook</span>
+              <span>Download your eBook</span>
             </a>
             <span
               className="link-options"
               onClick={() =>
-                handleShare("Download your ebook", "https://aitrends.now/ebook")
+                handleShare("Download your eBook", "https://aitrends.now/ebook")
               }
               role="button"
               tabIndex={0}
-              aria-label="Share Ebook link"
+              aria-label="Share eBook link"
             >
               ⋮
             </span>
+
+            {/* Include the EbookDownload component */}
+            <EbookDownload />
           </div>
 
           <div className="link-card special">
