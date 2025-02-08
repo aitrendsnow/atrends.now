@@ -12,6 +12,7 @@ const EbookDownload = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [submitted, setSubmitted] = useState(false);
+  const [downloadTriggered, setDownloadTriggered] = useState(false);
 
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
@@ -27,14 +28,7 @@ const EbookDownload = () => {
       const result = await response.text();
       if (result === "success") {
         setSubmitted(true);
-
-        // Automatically trigger the eBook download
-        const link = document.createElement("a");
-        link.href = EBOOK_URL;
-        link.download = "ebook.pdf";
-        document.body.appendChild(link);
-        link.click();
-        document.body.removeChild(link);
+        setDownloadTriggered(true);
       } else {
         alert("Failed to submit. Please try again.");
       }
@@ -84,10 +78,18 @@ const EbookDownload = () => {
             </Form>
           ) : (
             <>
-              <p>Thank you, {name}! Your email has been submitted.</p>
-              <a href={EBOOK_URL} download className="btn btn-success">
-                Click here to download your eBook
+              <p>Thank you, {name}! Your eBook is being downloaded now.</p>
+              <a href={EBOOK_URL} target="_blank" className="btn btn-success">
+                Click here if your download doesn’t start automatically
               </a>
+              {/* Hidden iframe to trigger automatic download */}
+              {downloadTriggered && (
+                <iframe
+                  src={EBOOK_URL}
+                  style={{ display: "none" }}
+                  title="ebook-download"
+                ></iframe>
+              )}
             </>
           )}
         </Modal.Body>
