@@ -1,7 +1,8 @@
-import { defineConfig } from 'vite';
+import { defineConfig, splitVendorChunkPlugin } from 'vite';
 import react from '@vitejs/plugin-react';
 import { ViteMinifyPlugin } from 'vite-plugin-minify';
 import { createHtmlPlugin } from 'vite-plugin-html';
+import { visualizer } from 'rollup-plugin-visualizer';
 
 export default defineConfig({
   plugins: [
@@ -17,9 +18,11 @@ export default defineConfig({
         },
       },
     }),
+    splitVendorChunkPlugin(),
+    visualizer({ open: true }),
   ],
   css: {
-    postcss: './postcss.config.js',
+    postcss: './postcss.config.cjs',
   },
   build: {
     rollupOptions: {},

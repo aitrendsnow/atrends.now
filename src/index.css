@@ -282,27 +282,12 @@ button:hover {
     height: 80px;
   }
 }
-
-/* Modal Styles */
-.modal-content {
-  font-size: inherit;
-}
-.modal-title {
-  font-size: 1.5rem;
+.form-control-larger-placeholder::placeholder {
+  color: gray; /* Or your desired shade of gray */
+  opacity: 1;
+  font-size: inherit; /* Ensure placeholder also inherits font size */
 }
 
-.form-label {
-  font-size: 1rem;
-}
-
-.form-control {
-  font-size: 1rem;
-}
-
-.btn {
-  font-size: 1rem;
-}
-
-.small {
-  font-size: 0.875rem;
+.form-control-larger-placeholder {
+  font-size: inherit; /* Ensure input text inherits font size */
 }

@@ -1,9 +1,10 @@
-import { useState, useEffect } from "react";
-import Footer from "./components/Footer";
+import { useState, useEffect, lazy, Suspense } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap-icons/font/bootstrap-icons.css";
 import "./index.css";
-import EbookDownload from "./components/EbookDownload";
+
+const Footer = lazy(() => import("./components/Footer"));
+const EbookDownload = lazy(() => import("./components/EbookDownload"));
 
 export default function App() {
   const [theme, setTheme] = useState(() => {
@@ -207,7 +208,9 @@ export default function App() {
         </div>
       </div>
 
-      <Footer />
+      <Suspense fallback={<div>Loading Footer...</div>}>
+        <Footer />
+      </Suspense>
     </div>
   );
 }
