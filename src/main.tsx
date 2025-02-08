@@ -1,21 +1,27 @@
-import React, { useEffect } from "react";
+import React from "react";
 import ReactDOM from "react-dom/client";
 import App from "./App";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./index.css";
 
-const isWebView = () => {
+const detectWebView = (): boolean => {
   const userAgent = navigator.userAgent || navigator.vendor;
-  return (
-    /FBAN|FBAV|Instagram|Twitter|Threads/i.test(userAgent) || // Detect common WebViews
-    navigator.standalone // Detect iOS standalone mode
-  );
+  const isStandalone =
+    (window.navigator as unknown as { standalone?: boolean }).standalone ||
+    false;
+
+  return /FBAN|FBAV|Instagram|Twitter|Threads/i.test(userAgent) || isStandalone;
 };
 
-if (isWebView()) {
-  document.documentElement.style.setProperty("--footer-padding", "15px");
-  document.documentElement.style.setProperty("--footer-font-size", "0.75rem");
-}
+const applyWebViewStyles = () => {
+  if (detectWebView()) {
+    document.documentElement.style.setProperty("--footer-padding", "15px");
+    document.documentElement.style.setProperty("--footer-font-size", "0.75rem");
+  }
+};
+
+// Apply styles before app renders
+applyWebViewStyles();
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
