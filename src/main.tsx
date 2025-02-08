@@ -4,27 +4,21 @@ import App from "./App";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./index.css";
 
-const detectWebView = () => {
-  const isWebView =
-    navigator.userAgent.includes("FBAN") ||
-    navigator.userAgent.includes("FBAV") ||
-    navigator.userAgent.includes("Instagram");
-
-  if (isWebView) {
-    document.documentElement.style.setProperty("--footer-font-size", "0.7rem");
-  }
-};
-
-const Main = () => {
-  useEffect(() => {
-    detectWebView();
-  }, []);
-
+const isWebView = () => {
+  const userAgent = navigator.userAgent || navigator.vendor;
   return (
-    <React.StrictMode>
-      <App />
-    </React.StrictMode>
+    /FBAN|FBAV|Instagram|Twitter|Threads/i.test(userAgent) || // Detect common WebViews
+    navigator.standalone // Detect iOS standalone mode
   );
 };
 
-ReactDOM.createRoot(document.getElementById("root")!).render(<Main />);
+if (isWebView()) {
+  document.documentElement.style.setProperty("--footer-padding", "15px");
+  document.documentElement.style.setProperty("--footer-font-size", "0.75rem");
+}
+
+ReactDOM.createRoot(document.getElementById("root")!).render(
+  <React.StrictMode>
+    <App />
+  </React.StrictMode>
+);
