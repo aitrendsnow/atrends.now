@@ -179,21 +179,27 @@ export default function App() {
           </div>
 
           <div className="link-card special">
-            <a href="mailto:contact@aitrends.now">
-              <i className="bi bi-envelope-fill"></i>
-              <span>Get the latest by email</span>
+            <a
+              href="https://github.com/aitrendsnow/aitrends.now"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              {" "}
+              {/* Updated link and target */}
+              <i className="bi bi-github"></i> {}
+              <span>View Source on GitHub</span> {}
             </a>
             <span
               className="link-options"
               onClick={() =>
                 handleShare(
-                  "Get the latest by email",
-                  "mailto:contact@aitrends.now"
+                  "View Source on GitHub",
+                  "https://github.com/aitrendsnow/aitrends.now"
                 )
               }
               role="button"
               tabIndex={0}
-              aria-label="Share Email link"
+              aria-label="Share GitHub link"
             >
               ⋮
             </span>

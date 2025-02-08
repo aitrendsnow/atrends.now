@@ -1,14 +1,14 @@
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 import { ViteMinifyPlugin } from 'vite-plugin-minify';
-import { createHtmlPlugin } from 'vite-plugin-html'; // ✅ Correct way to inline critical CSS
+import { createHtmlPlugin } from 'vite-plugin-html'; 
 
 export default defineConfig({
   plugins: [
     react(),
     ViteMinifyPlugin(),
     createHtmlPlugin({
-      minify: true, // Minifies HTML
+      minify: true, 
       inject: {
         data: {
           criticalCSS: `<style>
