@@ -72,7 +72,7 @@ footer {
   align-items: center;
   text-align: center;
   padding: 0 20px;
-  font-size: min(0.875rem, 3vw); /* Use `min()` for better WebView support */
+  font-size: var(--footer-font-size, clamp(0.6rem, 2.5vw, 0.875rem));
   box-sizing: border-box;
   white-space: nowrap;
   overflow: hidden;
