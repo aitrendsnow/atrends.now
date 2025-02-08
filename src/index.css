@@ -256,13 +256,14 @@ button:hover {
 
 .profile-description {
   font-family: "Google Sans", Arial, sans-serif;
-  font-display: swap;
   font-size: 16px;
   line-height: 1.5;
   color: #333;
   visibility: visible;
   opacity: 1;
   transition: opacity 0.2s ease-in-out;
+  content-visibility: auto; /* Ensures it's painted ASAP */
+  contain-intrinsic-size: auto 20px; /* Prevents layout shift */
 }
 
 .links-section {

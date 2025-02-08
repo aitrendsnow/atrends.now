@@ -21,28 +21,22 @@ export default defineConfig({
               color: #333;
               visibility: visible;
               opacity: 1;
+              content-visibility: auto;
+              contain-intrinsic-size: auto 20px;
               transition: opacity 0.2s ease-in-out;
             }
           </style>`,
         },
       },
     }),
-    visualizer({ open: true }),
-    viteCompression(),
+    visualizer({ open: false }), // Prevents browser auto-opening
+    viteCompression(), // Enables Brotli/Gzip compression
   ],
   css: {
     postcss: './postcss.config.cjs',
   },
   build: {
-    rollupOptions: {
-      output: {
-        manualChunks(id) {
-          if (id.includes('node_modules')) {
-            return 'vendor'; // Splits vendor dependencies into a separate file
-          }
-        },
-      },
-    },
+    rollupOptions: {},
   },
   base: 'https://aitrendsnow.github.io/aitrends.now/',
 });
