@@ -4,7 +4,7 @@ import { Modal, Button, Form, Image } from "react-bootstrap";
 const EBOOK_DOWNLOAD_URL =
   "https://github.com/aitrendsnow/aitrends.now/releases/download/v1.0/MasteringDeepSeek.pdf";
 
-const LOGO_PATH = "public/images/favicon.png";
+const LOGO_PATH = "/images/favicon.png";
 
 const EbookDownload = () => {
   const [show, setShow] = useState(false);
@@ -18,6 +18,7 @@ const EbookDownload = () => {
 
     try {
       setSubmitted(true);
+
       const link = document.createElement("a");
       link.href = EBOOK_DOWNLOAD_URL;
       link.download = "MasteringDeepSeek.pdf";
