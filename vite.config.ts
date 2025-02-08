@@ -1,4 +1,4 @@
-import { defineConfig, splitVendorChunkPlugin } from 'vite';
+import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 import { ViteMinifyPlugin } from 'vite-plugin-minify';
 import { createHtmlPlugin } from 'vite-plugin-html';
@@ -15,7 +15,7 @@ export default defineConfig({
         data: {
           criticalCSS: `<style>
             .profile-description {
-              font-family: 'Google Sans', sans-serif;
+              font-family: 'Google Sans', Arial, sans-serif;
               font-size: 16px;
               line-height: 1.5;
               color: #333;
@@ -27,15 +27,22 @@ export default defineConfig({
         },
       },
     }),
-    splitVendorChunkPlugin(),
     visualizer({ open: true }),
-    viteCompression(), // Enables Brotli/Gzip compression
+    viteCompression(),
   ],
   css: {
     postcss: './postcss.config.cjs',
   },
   build: {
-    rollupOptions: {},
+    rollupOptions: {
+      output: {
+        manualChunks(id) {
+          if (id.includes('node_modules')) {
+            return 'vendor'; // Splits vendor dependencies into a separate file
+          }
+        },
+      },
+    },
   },
   base: 'https://aitrendsnow.github.io/aitrends.now/',
 });
