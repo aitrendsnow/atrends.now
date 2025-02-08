@@ -255,8 +255,13 @@ button:hover {
 }
 
 .profile-description {
+  font-display: swap;
   font-size: 1rem;
   color: var(--footer-text);
+  min-height: 20px;
+  visibility: visible;
+  opacity: 1;
+  transition: opacity 0.2s ease-in-out;
 }
 
 .links-section {

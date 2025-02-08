@@ -58,9 +58,13 @@ export default function App() {
             loading="lazy"
           />
           <h1 className="profile-username">aitrends.now</h1>
-          <p className="profile-description">
-            Tech enthusiast. Follow for updates & a shared love for tech.
-          </p>
+          <Suspense
+            fallback={<p className="profile-description">Loading profile...</p>}
+          >
+            <p className="profile-description">
+              Tech enthusiast. Follow for updates & a shared love for tech.
+            </p>
+          </Suspense>
         </div>
 
         <div className="links-section">
