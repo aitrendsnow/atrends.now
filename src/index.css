@@ -2,7 +2,6 @@
 
 html,
 body {
-  -webkit-text-size-adjust: none;
   height: 100%;
   margin: 0;
   padding: 0;
@@ -73,9 +72,7 @@ footer {
   align-items: center;
   text-align: center;
   padding: 0 20px;
-  font-size: 0.6rem !important;
-  line-height: 1.2 !important;
-  -webkit-text-size-adjust: none !important;
+  font-size: 0.7rem; /* Set a small base size */
   box-sizing: border-box;
   white-space: nowrap;
   overflow: hidden;
