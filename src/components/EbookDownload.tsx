@@ -1,9 +1,10 @@
 import { useState } from "react";
-import { Modal, Button, Form } from "react-bootstrap";
+import { Modal, Button, Form, Image } from "react-bootstrap";
 
-// ✅ GitHub Releases direct download link (update with your actual link)
 const EBOOK_DOWNLOAD_URL =
-  "https://github.com/user-attachments/files/18716974/Mastering.DeepSeek_.Unleashing.Hidden.Features.Secret.Tricks.Powerful.Prompts.pdf";
+  "https://github.com/aitrendsnow/aitrends.now/releases/download/v1.0/MasteringDeepSeek.pdf";
+
+const LOGO_PATH = "public/images/favicon.png";
 
 const EbookDownload = () => {
   const [show, setShow] = useState(false);
@@ -16,10 +17,7 @@ const EbookDownload = () => {
     if (!name || !email) return;
 
     try {
-      // ✅ No need to upload PDF, just download it directly
       setSubmitted(true);
-
-      // ✅ Trigger automatic download
       const link = document.createElement("a");
       link.href = EBOOK_DOWNLOAD_URL;
       link.download = "MasteringDeepSeek.pdf";
@@ -34,49 +32,81 @@ const EbookDownload = () => {
 
   return (
     <>
-      <Modal show={show} onHide={() => setShow(false)} centered>
-        <Modal.Header closeButton>
-          <div>
-            <Modal.Title>Get the Free eBook</Modal.Title>
-            <p className="mt-2 text-muted" style={{ fontSize: "0.9rem" }}>
-              Thank you for being here. Our love for tech brought us here!
-            </p>
+      <Modal
+        show={show}
+        onHide={() => setShow(false)}
+        centered
+        className="border-0"
+      >
+        <Modal.Header className="border-0 pb-0 d-flex flex-column align-items-center position-relative pt-3">
+          <div className="position-absolute top-0 end-0 me-4 mt-4">
+            <Button variant="close" onClick={() => setShow(false)} />
           </div>
+          <div className="d-flex align-items-center mb-2 mt-2">
+            <Image
+              src={LOGO_PATH}
+              alt="Your Logo"
+              height={40}
+              className="me-3"
+            />
+            <Modal.Title className="fw-bold fs-5">
+              Get Your Free eBook
+            </Modal.Title>
+          </div>
+          <p className="small text-muted text-center">
+            Thank you for being here. Our love for tech brought us here!
+          </p>
         </Modal.Header>
-        <Modal.Body>
+        <Modal.Body className="pt-3 pb-4 px-4">
           {!submitted ? (
             <Form onSubmit={handleSubmit}>
-              <Form.Group controlId="name">
-                <Form.Label>Full Name</Form.Label>
+              <Form.Group controlId="name" className="mb-3">
+                <Form.Label className="small">Full Name</Form.Label>
                 <Form.Control
                   type="text"
                   placeholder="Enter your full name"
                   value={name}
                   onChange={(e) => setName(e.target.value)}
                   required
+                  className="form-control-sm border-0 rounded-0 shadow-none"
+                  style={{ borderBottom: "1px solid #ced4da" }}
                 />
               </Form.Group>
-              <Form.Group controlId="email" className="mt-3">
-                <Form.Label>Email Address</Form.Label>
+              <Form.Group controlId="email" className="mb-4">
+                <Form.Label className="small">Email Address</Form.Label>
                 <Form.Control
                   type="email"
                   placeholder="Enter your email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   required
+                  className="form-control-sm border-0 rounded-0 shadow-none"
+                  style={{ borderBottom: "1px solid #ced4da" }}
                 />
               </Form.Group>
-              <Button variant="primary" type="submit" className="mt-3">
-                Submit
-              </Button>
+              <div className="d-grid">
+                <Button
+                  variant="primary"
+                  type="submit"
+                  className="btn-sm rounded-0 shadow-none"
+                >
+                  Submit
+                </Button>
+              </div>
             </Form>
           ) : (
-            <>
-              <p>Thank you, {name}! Your eBook is being downloaded now.</p>
-              <a href={EBOOK_DOWNLOAD_URL} download className="btn btn-success">
+            <div className="text-center">
+              <p className="mb-3">
+                Thank you, {name}! Your eBook is being downloaded now.
+              </p>
+              <a
+                href={EBOOK_DOWNLOAD_URL}
+                download
+                className="btn btn-sm rounded-0 shadow-none btn-primary"
+              >
                 Click here to download your eBook
               </a>
-            </>
+            </div>
           )}
         </Modal.Body>
       </Modal>
