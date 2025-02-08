@@ -1,14 +1,14 @@
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 import { ViteMinifyPlugin } from 'vite-plugin-minify';
-import { createHtmlPlugin } from 'vite-plugin-html'; 
+import { createHtmlPlugin } from 'vite-plugin-html';
 
 export default defineConfig({
   plugins: [
     react(),
     ViteMinifyPlugin(),
     createHtmlPlugin({
-      minify: true, 
+      minify: true,
       inject: {
         data: {
           criticalCSS: `<style>
@@ -19,7 +19,7 @@ export default defineConfig({
     }),
   ],
   css: {
-    postcss: {},
+    postcss: './postcss.config.js',
   },
   build: {
     rollupOptions: {},
