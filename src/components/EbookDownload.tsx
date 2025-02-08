@@ -4,6 +4,9 @@ import { Modal, Button, Form } from "react-bootstrap";
 const GOOGLE_SCRIPT_URL =
   "https://script.google.com/macros/s/AKfycbyGuN3NPpHzE3QsQreJU1Q5HjbPdowhWCpaThXoGwhI8U8ait61CAfxdA4imk_9EZwi/exec";
 
+const EBOOK_URL =
+  "https://drive.google.com/uc?export=download&id=1cdLvffy90lX2z7UPkoCH83LiZAjxvZjn";
+
 const EbookDownload = () => {
   const [show, setShow] = useState(false);
   const [name, setName] = useState("");
@@ -25,10 +28,10 @@ const EbookDownload = () => {
       if (result === "success") {
         setSubmitted(true);
 
-        // Trigger the download automatically
+        // Automatically trigger the eBook download
         const link = document.createElement("a");
-        link.href = "/aitrends.now/ebook.pdf"; // Replace with the actual eBook file path
-        link.download = "ebook.pdf"; // File name for the download
+        link.href = EBOOK_URL;
+        link.download = "ebook.pdf";
         document.body.appendChild(link);
         link.click();
         document.body.removeChild(link);
@@ -43,7 +46,6 @@ const EbookDownload = () => {
 
   return (
     <>
-      {/* Modal for name and email input */}
       <Modal show={show} onHide={() => setShow(false)} centered>
         <Modal.Header closeButton>
           <div>
@@ -83,18 +85,13 @@ const EbookDownload = () => {
           ) : (
             <>
               <p>Thank you, {name}! Your email has been submitted.</p>
-              <a
-                href="/aitrends.now/ebook.pdf"
-                download
-                className="btn btn-success"
-              >
+              <a href={EBOOK_URL} download className="btn btn-success">
                 Click here to download your eBook
               </a>
             </>
           )}
         </Modal.Body>
       </Modal>
-      {/* Hidden trigger to open modal */}
       <button
         type="button"
         className="d-none"
