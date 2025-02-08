@@ -1,8 +1,9 @@
 import { useState } from "react";
 import { Modal, Button, Form } from "react-bootstrap";
 
-const EBOOK_URL =
-  "https://aitrendsnow.github.io/aitrends.now/ebooks/mastering-deepseek.pdf"; // Hosted on GitHub
+// ✅ GitHub Releases direct download link (update with your actual link)
+const EBOOK_DOWNLOAD_URL =
+  "https://github.com/user-attachments/files/18716974/Mastering.DeepSeek_.Unleashing.Hidden.Features.Secret.Tricks.Powerful.Prompts.pdf";
 
 const EbookDownload = () => {
   const [show, setShow] = useState(false);
@@ -14,11 +15,21 @@ const EbookDownload = () => {
     event.preventDefault();
     if (!name || !email) return;
 
-    // Simulate form submission process
-    setSubmitted(true);
+    try {
+      // ✅ No need to upload PDF, just download it directly
+      setSubmitted(true);
 
-    // Open the download link automatically
-    window.open(EBOOK_URL, "_blank");
+      // ✅ Trigger automatic download
+      const link = document.createElement("a");
+      link.href = EBOOK_DOWNLOAD_URL;
+      link.download = "MasteringDeepSeek.pdf";
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    } catch (error) {
+      console.error("Error submitting data:", error);
+      alert("An error occurred. Please try again.");
+    }
   };
 
   return (
@@ -61,9 +72,9 @@ const EbookDownload = () => {
             </Form>
           ) : (
             <>
-              <p>Thank you, {name}! Your eBook is downloading now.</p>
-              <a href={EBOOK_URL} target="_blank" className="btn btn-success">
-                Click here if your download doesn’t start automatically
+              <p>Thank you, {name}! Your eBook is being downloaded now.</p>
+              <a href={EBOOK_DOWNLOAD_URL} download className="btn btn-success">
+                Click here to download your eBook
               </a>
             </>
           )}
