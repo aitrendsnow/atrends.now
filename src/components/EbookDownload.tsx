@@ -4,7 +4,7 @@ import { Modal, Button, Form, Image } from "react-bootstrap";
 const EBOOK_DOWNLOAD_URL =
   "https://github.com/user-attachments/files/18716974/Mastering.DeepSeek_.Unleashing.Hidden.Features.Secret.Tricks.Powerful.Prompts.pdf";
 
-const LOGO_PATH = "/images/favicon.png";
+const LOGO_PATH = "public/images/favicon.png";
 
 const EbookDownload = () => {
   const [show, setShow] = useState(false);
@@ -46,7 +46,7 @@ const EbookDownload = () => {
           <div className="d-flex align-items-center mb-2 mt-2">
             <Image
               src={LOGO_PATH}
-              alt="Your Logo"
+              alt="Ai Trends Logo"
               height={40}
               className="me-3"
             />
