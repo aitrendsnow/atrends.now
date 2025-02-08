@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Modal, Button, Form, Image } from "react-bootstrap";
 
 const EBOOK_DOWNLOAD_URL =
-  "https://github.com/aitrendsnow/aitrends.now/releases/download/v1.0/MasteringDeepSeek.pdf";
+  "https://github.com/user-attachments/files/18716974/Mastering.DeepSeek_.Unleashing.Hidden.Features.Secret.Tricks.Powerful.Prompts.pdf";
 
 const LOGO_PATH = "/images/favicon.png";
 
@@ -100,13 +100,6 @@ const EbookDownload = () => {
               <p className="mb-3">
                 Thank you, {name}! Your eBook is being downloaded now.
               </p>
-              <a
-                href={EBOOK_DOWNLOAD_URL}
-                download
-                className="btn btn-sm rounded-0 shadow-none btn-primary"
-              >
-                Click here to download your eBook
-              </a>
             </div>
           )}
         </Modal.Body>
