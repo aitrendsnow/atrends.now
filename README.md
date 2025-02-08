@@ -5,7 +5,3 @@
 </p>
 
 Welcome to **aitrends.now**, a platform dedicated to tech enthusiasts who share a passion for technology, innovation, and the future of artificial intelligence. It's for our love of the Tech, man! Nothing else.
-
-## 🖼️ Preview
-
-![Screenshot](/public/images/social-share.webp)
