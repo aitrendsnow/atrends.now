@@ -72,11 +72,20 @@ footer {
   align-items: center;
   text-align: center;
   padding: 0 20px;
-  font-size: clamp(0.6rem, 2.5em, 0.875rem);
+  font-size: clamp(0.6rem, 1em, 0.875rem); /* Use `em` instead of `vw` */
   box-sizing: border-box;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+}
+footer {
+  font-size: 0.875rem; /* Default size */
+}
+
+@supports (font-size: clamp(0.6rem, 1em, 0.875rem)) {
+  footer {
+    font-size: clamp(0.6rem, 1em, 0.875rem);
+  }
 }
 
 /* General Styles */
