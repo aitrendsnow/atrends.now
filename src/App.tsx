@@ -160,7 +160,7 @@ export default function App() {
               }}
             >
               <i className="bi bi-book"></i>
-              <span>Download your eBook</span>
+              <span>Hidden modifiers (eBooks)</span>
             </a>
             <span
               className="link-options"
