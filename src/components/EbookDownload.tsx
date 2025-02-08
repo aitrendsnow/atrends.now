@@ -1,41 +1,24 @@
 import { useState } from "react";
 import { Modal, Button, Form } from "react-bootstrap";
 
-const GOOGLE_SCRIPT_URL =
-  "https://script.google.com/macros/s/AKfycbyGuN3NPpHzE3QsQreJU1Q5HjbPdowhWCpaThXoGwhI8U8ait61CAfxdA4imk_9EZwi/exec";
-
 const EBOOK_URL =
-  "https://drive.google.com/uc?export=download&id=1cdLvffy90lX2z7UPkoCH83LiZAjxvZjn";
+  "https://aitrendsnow.github.io/aitrends.now/ebooks/mastering-deepseek.pdf"; // Hosted on GitHub
 
 const EbookDownload = () => {
   const [show, setShow] = useState(false);
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [submitted, setSubmitted] = useState(false);
-  const [downloadTriggered, setDownloadTriggered] = useState(false);
 
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
     if (!name || !email) return;
 
-    try {
-      const response = await fetch(GOOGLE_SCRIPT_URL, {
-        method: "POST",
-        body: JSON.stringify({ name, email }),
-        headers: { "Content-Type": "application/json" },
-      });
+    // Simulate form submission process
+    setSubmitted(true);
 
-      const result = await response.text();
-      if (result === "success") {
-        setSubmitted(true);
-        setDownloadTriggered(true);
-      } else {
-        alert("Failed to submit. Please try again.");
-      }
-    } catch (error) {
-      console.error("Error submitting data:", error);
-      alert("An error occurred. Please try again.");
-    }
+    // Open the download link automatically
+    window.open(EBOOK_URL, "_blank");
   };
 
   return (
@@ -78,18 +61,10 @@ const EbookDownload = () => {
             </Form>
           ) : (
             <>
-              <p>Thank you, {name}! Your eBook is being downloaded now.</p>
+              <p>Thank you, {name}! Your eBook is downloading now.</p>
               <a href={EBOOK_URL} target="_blank" className="btn btn-success">
                 Click here if your download doesn’t start automatically
               </a>
-              {/* Hidden iframe to trigger automatic download */}
-              {downloadTriggered && (
-                <iframe
-                  src={EBOOK_URL}
-                  style={{ display: "none" }}
-                  title="ebook-download"
-                ></iframe>
-              )}
             </>
           )}
         </Modal.Body>
