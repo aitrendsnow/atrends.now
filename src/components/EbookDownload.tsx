@@ -4,7 +4,7 @@ import { Modal, Button, Form, Image } from "react-bootstrap";
 const EBOOK_DOWNLOAD_URL =
   "https://github.com/user-attachments/files/18716974/Mastering.DeepSeek_.Unleashing.Hidden.Features.Secret.Tricks.Powerful.Prompts.pdf";
 
-const LOGO_PATH = "public/images/favicon.png";
+const LOGO_PATH = "images/favicon.png";
 
 const EbookDownload = () => {
   const [show, setShow] = useState(false);
