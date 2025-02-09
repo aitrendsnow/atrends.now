@@ -21,7 +21,6 @@ export default function App() {
     setTheme(newTheme);
   };
 
-  /** ✅ Updated: Detect Threads & In-App Browsers */
   const isAppBrowser = () => {
     const userAgent = navigator.userAgent || navigator.vendor;
     return (
@@ -31,7 +30,6 @@ export default function App() {
     );
   };
 
-  /** ✅ Updated: Share with Fallback if In-App Browser Blocks it */
   const handleShare = (title: string, url: string): void => {
     if (!isAppBrowser() && navigator.share) {
       navigator
@@ -39,9 +37,10 @@ export default function App() {
         .then(() => console.log("Content shared successfully"))
         .catch((error) => console.error("Error sharing content:", error));
     } else {
-      // Fallback: Copy to clipboard
       navigator.clipboard.writeText(url);
-      alert("Link copied! Paste it anywhere to share.");
+      alert(
+        "Link copied! Paste it anywhere to share. In-app browser doesn't directly support sharing."
+      );
     }
   };
 
