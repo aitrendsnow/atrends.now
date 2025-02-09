@@ -3,6 +3,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap-icons/font/bootstrap-icons.css";
 import "./index.css";
 
+const Footer = lazy(() => import("./components/Footer"));
 const EbookDownload = lazy(() => import("./components/EbookDownload"));
 
 export default function App() {
@@ -222,12 +223,7 @@ export default function App() {
       </div>
 
       <Suspense fallback={<div>Loading Footer...</div>}>
-        <footer style={{ fontSize: "0.75rem" }}>
-          <p>
-            &copy; {new Date().getFullYear()} aitrends.now. All rights reserved.
-            For the love of Tech.
-          </p>
-        </footer>
+        <Footer />
       </Suspense>
     </div>
   );
