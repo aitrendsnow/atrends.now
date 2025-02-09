@@ -3,7 +3,6 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap-icons/font/bootstrap-icons.css";
 import "./index.css";
 
-const Footer = lazy(() => import("./components/Footer"));
 const EbookDownload = lazy(() => import("./components/EbookDownload"));
 
 export default function App() {
@@ -21,17 +20,27 @@ export default function App() {
     setTheme(newTheme);
   };
 
+  /** ✅ Updated: Detect Threads & In-App Browsers */
+  const isAppBrowser = () => {
+    const userAgent = navigator.userAgent || navigator.vendor;
+    return (
+      userAgent.includes("Instagram") ||
+      userAgent.includes("Threads") ||
+      userAgent.includes("FB")
+    );
+  };
+
+  /** ✅ Updated: Share with Fallback if In-App Browser Blocks it */
   const handleShare = (title: string, url: string): void => {
-    if (navigator.share) {
+    if (!isAppBrowser() && navigator.share) {
       navigator
-        .share({
-          title: title,
-          url: url,
-        })
+        .share({ title, url })
         .then(() => console.log("Content shared successfully"))
         .catch((error) => console.error("Error sharing content:", error));
     } else {
-      alert("Sharing is not supported on this device.");
+      // Fallback: Copy to clipboard
+      navigator.clipboard.writeText(url);
+      alert("Link copied! Paste it anywhere to share.");
     }
   };
 
@@ -213,7 +222,12 @@ export default function App() {
       </div>
 
       <Suspense fallback={<div>Loading Footer...</div>}>
-        <Footer />
+        <footer style={{ fontSize: "0.75rem" }}>
+          <p>
+            &copy; {new Date().getFullYear()} aitrends.now. All rights reserved.
+            For the love of Tech.
+          </p>
+        </footer>
       </Suspense>
     </div>
   );
