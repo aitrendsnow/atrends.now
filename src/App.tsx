@@ -3,7 +3,6 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap-icons/font/bootstrap-icons.css";
 import "./index.css";
 
-const Footer = lazy(() => import("./components/Footer"));
 const EbookDownload = lazy(() => import("./components/EbookDownload"));
 
 export default function App() {
@@ -174,7 +173,7 @@ export default function App() {
               }}
             >
               <i className="bi bi-book"></i>
-              <span>Hidden modifiers (eBooks)</span>
+              <span>Mastering Deepseek (eBook)</span>
             </a>
             <span
               className="link-options"
@@ -222,7 +221,11 @@ export default function App() {
       </div>
 
       <Suspense fallback={<div>Loading Footer...</div>}>
-        <Footer />
+        <footer style={{ fontSize: "0.75rem" }}>
+          <p>
+            &copy; {new Date().getFullYear()} aitrends.now. All rights reserved.
+          </p>
+        </footer>
       </Suspense>
     </div>
   );
