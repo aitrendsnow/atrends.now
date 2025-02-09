@@ -7,7 +7,7 @@ const EBOOK_DOWNLOAD_URL =
 const LOGO_PATH = "images/favicon.png";
 
 const GOOGLE_SCRIPT_URL =
-  "https://script.google.com/macros/s/AKfycbwdxHQPMbZex_dnHJtozGMLdvAIc_TOxqDkXMSn7X0iD91Tj4p9aUiUnwL2AaJ47U3QZg/exec";
+  "https://script.google.com/macros/s/AKfycbxIxcRLxeWDLbqmiAW4xUYGYF6tlyQA9ybhZsEFu5HciFBu_9eSTa3RNR-ZC2Ja7KO0DQ/exec";
 
 const EbookDownload = () => {
   const [show, setShow] = useState(false);
