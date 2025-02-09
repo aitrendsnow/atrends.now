@@ -14,6 +14,7 @@ const EbookDownload = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [submitted, setSubmitted] = useState(false);
+  const [error, setError] = useState(false);
 
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
@@ -21,15 +22,21 @@ const EbookDownload = () => {
 
     try {
       setSubmitted(true);
+      setError(false); // Reset error state
 
       // Send data to Google Sheets
-      await fetch(GOOGLE_SCRIPT_URL, {
+      const response = await fetch(GOOGLE_SCRIPT_URL, {
         method: "POST",
         body: JSON.stringify({ name, email }),
         headers: { "Content-Type": "application/json" },
       });
 
-      // Trigger file download
+      const result = await response.text();
+      if (result !== "Success") {
+        throw new Error(`Google Sheets error: ${result}`);
+      }
+
+      // Only download if the Google Sheets update was successful
       const link = document.createElement("a");
       link.href = EBOOK_DOWNLOAD_URL;
       link.download = "MasteringDeepSeek.pdf";
@@ -38,7 +45,8 @@ const EbookDownload = () => {
       document.body.removeChild(link);
     } catch (error) {
       console.error("Error submitting data:", error);
-      alert("An error occurred. Please try again.");
+      setError(true); // Show error message
+      setSubmitted(false); // Reset form to allow retry
     }
   };
 
@@ -138,6 +146,10 @@ const EbookDownload = () => {
                 </Button>
               </div>
             </Form>
+          ) : error ? (
+            <div className="text-center text-danger">
+              <p className="mb-3">An error occurred. Please try again.</p>
+            </div>
           ) : (
             <div className="text-center">
               <p className="mb-3">
