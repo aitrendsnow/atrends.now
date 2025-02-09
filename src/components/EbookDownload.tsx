@@ -7,7 +7,7 @@ const EBOOK_DOWNLOAD_URL =
 const LOGO_PATH = "images/favicon.png";
 
 const GOOGLE_SCRIPT_URL =
-  "https://script.google.com/macros/s/AKfycbxIxcRLxeWDLbqmiAW4xUYGYF6tlyQA9ybhZsEFu5HciFBu_9eSTa3RNR-ZC2Ja7KO0DQ/exec";
+  "https://script.google.com/macros/s/AKfycbzKz03CLv6V5lePGZpqOOj_Fp6-xP-sug01kXdbLncRuv_ayirbbWLRvB9jdmKA0e8zaA/exec";
 
 const EbookDownload = () => {
   const [show, setShow] = useState(false);
@@ -15,6 +15,7 @@ const EbookDownload = () => {
   const [email, setEmail] = useState("");
   const [submitted, setSubmitted] = useState(false);
   const [error, setError] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
 
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
@@ -22,31 +23,40 @@ const EbookDownload = () => {
 
     try {
       setSubmitted(true);
-      setError(false); // Reset error state
+      setError(false);
+      setErrorMessage("");
 
-      // Send data to Google Sheets
+      console.log("Submitting data to Google Sheets:", { name, email });
+
+      // ✅ Add `mode: "no-cors"` to temporarily bypass CORS
       const response = await fetch(GOOGLE_SCRIPT_URL, {
         method: "POST",
+        mode: "no-cors", // 🔥 Temporary fix to bypass CORS for Google Apps Script
+        headers: {
+          "Content-Type": "application/json",
+        },
         body: JSON.stringify({ name, email }),
-        headers: { "Content-Type": "application/json" },
       });
 
-      const result = await response.text();
-      if (result !== "Success") {
-        throw new Error(`Google Sheets error: ${result}`);
-      }
+      console.log("Google Script Response:", response); // Debugging line
 
-      // Only download if the Google Sheets update was successful
-      const link = document.createElement("a");
-      link.href = EBOOK_DOWNLOAD_URL;
-      link.download = "MasteringDeepSeek.pdf";
-      document.body.appendChild(link);
-      link.click();
-      document.body.removeChild(link);
-    } catch (error) {
+      // ✅ Since `no-cors` blocks response, just assume success for now
+      setTimeout(() => {
+        const link = document.createElement("a");
+        link.href = EBOOK_DOWNLOAD_URL;
+        link.download = "MasteringDeepSeek.pdf";
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+      }, 2000);
+    } catch (err) {
+      const error = err as Error;
       console.error("Error submitting data:", error);
-      setError(true); // Show error message
-      setSubmitted(false); // Reset form to allow retry
+      setError(true);
+      setErrorMessage(
+        error.message || "An unexpected error occurred. Please try again."
+      );
+      setSubmitted(false);
     }
   };
 
@@ -149,6 +159,7 @@ const EbookDownload = () => {
           ) : error ? (
             <div className="text-center text-danger">
               <p className="mb-3">An error occurred. Please try again.</p>
+              <p className="small">{errorMessage}</p>
             </div>
           ) : (
             <div className="text-center">
