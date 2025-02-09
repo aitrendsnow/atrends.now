@@ -44,12 +44,43 @@ const EbookDownload = () => {
 
   return (
     <>
-      <Modal show={show} onHide={() => setShow(false)} centered>
-        <Modal.Header
-          closeButton
-          className="d-flex flex-column align-items-center pt-3"
-        >
-          <div className="d-flex align-items-center mb-2">
+      <style type="text/css">
+        {`
+          .form-group-aligned {
+            display: grid;
+            grid-template-columns: auto 1fr;
+            gap: 10px;
+            align-items: center;
+          }
+
+          .form-group-aligned .form-label {
+            text-align: right;
+            padding-right: 10px;
+          }
+
+          .form-control-custom-placeholder::placeholder {
+            color: lightgray;
+            opacity: 1;
+            font-size: inherit;
+          }
+
+          .form-control-custom-placeholder {
+            font-size: inherit;
+            padding-left: 10px;
+          }
+        `}
+      </style>
+      <Modal
+        show={show}
+        onHide={() => setShow(false)}
+        centered
+        className="border-0"
+      >
+        <Modal.Header className="border-0 pb-0 d-flex flex-column align-items-center position-relative pt-3">
+          <div className="position-absolute top-0 end-0 me-4 mt-4">
+            <Button variant="close" onClick={() => setShow(false)} />
+          </div>
+          <div className="d-flex align-items-center mb-2 mt-2">
             <Image
               src={LOGO_PATH}
               alt="Ai Trends Logo"
@@ -64,32 +95,48 @@ const EbookDownload = () => {
             Thank you for being here. Our love for tech brought us here!
           </p>
         </Modal.Header>
-        <Modal.Body>
+        <Modal.Body className="pt-3 pb-4 px-4">
           {!submitted ? (
             <Form onSubmit={handleSubmit}>
-              <Form.Group controlId="name" className="mb-3">
-                <Form.Label>Full Name:</Form.Label>
+              <Form.Group controlId="name" className="mb-3 form-group-aligned">
+                <Form.Label className="form-label">Full Name:</Form.Label>
                 <Form.Control
                   type="text"
                   placeholder="Enter your full name"
                   value={name}
                   onChange={(e) => setName(e.target.value)}
                   required
+                  className="border-0 rounded-0 shadow-none form-control-custom-placeholder"
+                  style={{
+                    borderBottom: "1px solid #ced4da",
+                    fontSize: "inherit",
+                  }}
                 />
               </Form.Group>
-              <Form.Group controlId="email" className="mb-4">
-                <Form.Label>Email Address:</Form.Label>
+              <Form.Group controlId="email" className="mb-4 form-group-aligned">
+                <Form.Label className="form-label">Email Address:</Form.Label>
                 <Form.Control
                   type="email"
                   placeholder="Enter your email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   required
+                  className="border-0 rounded-0 shadow-none form-control-custom-placeholder"
+                  style={{
+                    borderBottom: "1px solid #ced4da",
+                    fontSize: "inherit",
+                  }}
                 />
               </Form.Group>
-              <Button variant="primary" type="submit" className="w-100">
-                Submit
-              </Button>
+              <div className="d-grid">
+                <Button
+                  variant="primary"
+                  type="submit"
+                  className="rounded-0 shadow-none"
+                >
+                  Submit
+                </Button>
+              </div>
             </Form>
           ) : (
             <div className="text-center">
