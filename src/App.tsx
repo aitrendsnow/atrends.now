@@ -111,7 +111,7 @@ export default function App() {
 
           <div className="link-card">
             <a
-              href="https://bluesky.social/@aitrends.now"
+              href="https://bsky.app/profile/aitrendsnow.bsky.social"
               target="_blank"
               rel="noopener noreferrer"
             >
