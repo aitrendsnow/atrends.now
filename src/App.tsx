@@ -109,7 +109,7 @@ export default function App() {
             </span>
           </div>
 
-          <div className="link-card">
+          <div className="link-card special">
             <a
               href="https://bsky.app/profile/aitrendsnow.bsky.social"
               target="_blank"
