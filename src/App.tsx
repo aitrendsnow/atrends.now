@@ -109,7 +109,7 @@ export default function App() {
             </span>
           </div>
 
-          <div className="link-card special">
+          <div className="link-card">
             <a
               href="https://bsky.app/profile/aitrendsnow.bsky.social"
               target="_blank"
@@ -148,8 +148,11 @@ export default function App() {
               target="_blank"
               rel="noopener noreferrer"
             >
+              {" "}
               <i className="bi bi-instagram"></i>
+              {}
               <span>Instagram</span>
+              {}
             </a>
             <span
               className="link-options"
@@ -198,7 +201,6 @@ export default function App() {
               rel="noopener noreferrer"
             >
               {" "}
-              {/* Updated link and target */}
               <i className="bi bi-github"></i> {}
               <span>View Source on GitHub</span> {}
             </a>
