@@ -298,3 +298,4 @@ button:hover {
 .form-control-larger-placeholder {
   font-size: inherit; /* Ensure input text inherits font size */
 }
+/* Force display of Threads icon - Specificity test */
