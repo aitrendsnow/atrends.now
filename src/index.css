@@ -12,6 +12,7 @@ body {
   transition: background-color 0.3s, color 0.3s;
   display: flex;
   flex-direction: column;
+  font-size: 16px;
 }
 
 :root {
@@ -38,12 +39,6 @@ html[data-theme="dark"] {
 }
 
 #root {
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
-}
-
-.wrapper {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
@@ -103,20 +98,20 @@ a:hover {
 }
 
 h1 {
-  font-size: 2.5rem;
+  font-size: 2rem; /* Mobile-first size */
   font-weight: 700;
 }
 
 h2 {
-  font-size: 2rem;
+  font-size: 1.75rem; /* Mobile-first size */
 }
 
 h3 {
-  font-size: 1.75rem;
+  font-size: 1.5rem; /* Mobile-first size */
 }
 
 p {
-  font-size: 1rem;
+  font-size: 0.9375rem; /* Mobile-first size */
   line-height: 1.6;
 }
 
@@ -134,6 +129,12 @@ button {
 
 button:hover {
   background-color: var(--button-hover-border);
+}
+
+button:focus-visible {
+  /* Accessibility improvement */
+  outline: 2px solid var(--button-hover-border);
+  outline-offset: 2px;
 }
 
 /* Link Cards */
@@ -224,17 +225,6 @@ button:hover {
   color: var(--text-color);
 }
 
-.theme-switcher-btn:hover {
-  background: none !important;
-  outline: none;
-  box-shadow: none;
-}
-
-.theme-switcher-btn:focus {
-  outline: none;
-  box-shadow: none;
-}
-
 .profile-section {
   margin-bottom: 2rem;
 }
@@ -299,3 +289,15 @@ button:hover {
   font-size: inherit; /* Ensure input text inherits font size */
 }
 /* Force display of Threads icon - Specificity test */
+.profile-image {
+  width: 100px;
+  height: 100px;
+}
+/* Larger Input Placeholder -  POTENTIAL OVERRIDE */
+.form-control-larger-placeholder::placeholder {
+  /*  Could add specific styles here if needed for larger screens */
+}
+
+.form-control-larger-placeholder {
+  /*  Could add specific styles here if needed for larger screens */
+}
