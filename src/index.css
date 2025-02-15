@@ -118,23 +118,10 @@ p {
 button {
   border-radius: 8px;
   border: none;
-  padding: 0.6em 1.2em;
+  padding: 0.6em 1.2em; /* Adjust as needed */
   font-size: 1rem;
   font-weight: 500;
-  background-color: var(--button-bg);
-  color: var(--button-text);
   cursor: pointer;
-  transition: background-color 0.3s, color 0.3s;
-}
-
-button:hover {
-  background-color: var(--button-hover-border);
-}
-
-button:focus-visible {
-  /* Accessibility improvement */
-  outline: 2px solid var(--button-hover-border);
-  outline-offset: 2px;
 }
 
 /* Link Cards */
@@ -211,7 +198,6 @@ button:focus-visible {
 }
 
 .theme-switcher-btn {
-  background: transparent;
   background-color: transparent;
   border: none;
   padding: 0;
@@ -224,6 +210,7 @@ button:focus-visible {
 .theme-switcher-btn i {
   font-size: 1.5rem;
   color: var(--text-color);
+  transition: color 0.3s;
 }
 
 .profile-section {
