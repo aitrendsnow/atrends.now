@@ -210,10 +210,9 @@ button:focus-visible {
   }
 }
 
-/* Keep your existing button styles as they are */
-
 .theme-switcher-btn {
-  background-color: var(--button-bg);
+  background: transparent;
+  background-color: transparent;
   border: none;
   padding: 0;
   cursor: pointer;
