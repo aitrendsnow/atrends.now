@@ -6,7 +6,7 @@
   "homepage": "https://aitrendsnow.github.io/atrends.now",
   "scripts": {
     "dev": "vite --host",
-    "build": "tsc -b && vite build",
+    "build": "tsc -b && vite build && critical dist/index.html --base dist/ --inline --width 1300 --height 900 --target-html dist/index.html",
     "lint": "eslint .",
     "preview": "vite preview",
     "deploy": "vite build && gh-pages -d dist"
@@ -27,6 +27,7 @@
     "@types/react": "^18.3.18",
     "@types/react-dom": "^18.3.5",
     "@vitejs/plugin-react": "^4.3.4",
+    "critical": "^7.2.1",
     "critters": "^0.0.23",
     "critters-webpack-plugin": "^3.0.2",
     "cssnano": "^7.0.6",
@@ -36,6 +37,8 @@
     "gh-pages": "^6.3.0",
     "glob": "^11.0.1",
     "globals": "^15.14.0",
+    "html-minifier": "^4.0.0",
+    "html-minifier-terser": "^7.2.0",
     "jsdom": "^26.0.0",
     "penthouse": "^2.3.3",
     "postcss": "^8.5.1",
@@ -52,6 +55,8 @@
     "vite": "^6.1.0",
     "vite-plugin-compression": "^0.5.1",
     "vite-plugin-html": "^3.2.2",
-    "vite-plugin-minify": "^2.1.0"
+    "vite-plugin-html-config": "^2.0.2",
+    "vite-plugin-minify": "^2.1.0",
+    "vite-plugin-purgecss": "^0.2.12"
   }
 }
