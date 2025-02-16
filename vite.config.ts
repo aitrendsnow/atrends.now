@@ -3,14 +3,14 @@ import react from '@vitejs/plugin-react';
 import { ViteMinifyPlugin } from 'vite-plugin-minify';
 import { visualizer } from 'rollup-plugin-visualizer';
 import viteCompression from 'vite-plugin-compression';
-import createHtmlConfig from 'vite-plugin-html-config';
+//import createHtmlConfig from 'vite-plugin-html-config'; // No longer needed
+//import Critters from 'critters'; // No longer needed.
 
 export default defineConfig({
   plugins: [
     react(),
-    ViteMinifyPlugin(),
-    createHtmlConfig({
-    }),
+    ViteMinifyPlugin(), // Handles HTML, CSS, and JS minification
+    // No critters plugin needed here
     visualizer({ open: false }),
     viteCompression(),
   ],
@@ -24,15 +24,12 @@ export default defineConfig({
           const fileName = assetInfo.name || 'default-asset-name';
           let extType = fileName.split('.').at(-1);
 
-          // Handle the case where extType might be undefined
           if (!extType) {
-            extType = 'unknown'; // Or some other suitable default
+            extType = 'unknown';
           }
 
           if (/png|jpe?g|svg|gif|tiff|bmp|ico/i.test(extType)) {
             extType = 'img';
-          } else if (/woff|woff2/.test(extType)) {
-            extType = 'fonts';
           }
           return `assets/${extType}/[name]-[hash][extname]`;
         },
