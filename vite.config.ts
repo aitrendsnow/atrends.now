@@ -3,14 +3,12 @@ import react from '@vitejs/plugin-react';
 import { ViteMinifyPlugin } from 'vite-plugin-minify';
 import { visualizer } from 'rollup-plugin-visualizer';
 import viteCompression from 'vite-plugin-compression';
-//import createHtmlConfig from 'vite-plugin-html-config'; // No longer needed
-//import Critters from 'critters'; // No longer needed.
+
 
 export default defineConfig({
   plugins: [
     react(),
-    ViteMinifyPlugin(), // Handles HTML, CSS, and JS minification
-    // No critters plugin needed here
+    ViteMinifyPlugin(), 
     visualizer({ open: false }),
     viteCompression(),
   ],
