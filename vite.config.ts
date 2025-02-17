@@ -3,14 +3,20 @@ import react from '@vitejs/plugin-react';
 import { ViteMinifyPlugin } from 'vite-plugin-minify';
 import { visualizer } from 'rollup-plugin-visualizer';
 import viteCompression from 'vite-plugin-compression';
-
+import { imagetools } from 'vite-imagetools'; // Correct import
 
 export default defineConfig({
   plugins: [
     react(),
-    ViteMinifyPlugin(), 
+    ViteMinifyPlugin(),
     visualizer({ open: false }),
-    viteCompression(),
+    viteCompression({
+      // @ts-ignore - 'headers' is not in the type definition yet
+      headers: {
+        'Cache-Control': 'public, max-age=31536000, immutable',
+      },
+    }),
+    imagetools(),
   ],
   css: {
     postcss: './postcss.config.cjs',
@@ -21,15 +27,15 @@ export default defineConfig({
         assetFileNames: (assetInfo) => {
           const fileName = assetInfo.name || 'default-asset-name';
           let extType = fileName.split('.').at(-1);
-  
+
           if (!extType) {
             extType = 'unknown';
           }
-  
+
           if (/png|jpe?g|svg|gif|tiff|bmp|ico/i.test(extType)) {
             extType = 'img';
           } else if (/woff|woff2/.test(extType)) {
-            extType = 'fonts'; // This is essential!
+            extType = 'fonts';
           }
           return `assets/${extType}/[name]-[hash][extname]`;
         },
