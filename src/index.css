@@ -180,6 +180,7 @@ button {
 
 .link-card a {
   display: flex;
+  font-weight: 400;
   align-items: center;
   text-decoration: none;
   color: inherit;
