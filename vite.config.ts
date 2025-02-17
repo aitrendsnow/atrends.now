@@ -21,13 +21,15 @@ export default defineConfig({
         assetFileNames: (assetInfo) => {
           const fileName = assetInfo.name || 'default-asset-name';
           let extType = fileName.split('.').at(-1);
-
+  
           if (!extType) {
             extType = 'unknown';
           }
-
+  
           if (/png|jpe?g|svg|gif|tiff|bmp|ico/i.test(extType)) {
             extType = 'img';
+          } else if (/woff|woff2/.test(extType)) {
+            extType = 'fonts'; // This is essential!
           }
           return `assets/${extType}/[name]-[hash][extname]`;
         },
