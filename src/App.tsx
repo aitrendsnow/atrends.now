@@ -38,31 +38,20 @@ export default function App() {
   };
 
   const handleShare = async (title: string, url: string): Promise<void> => {
-    // Make it async
     if (!isAppBrowser && navigator.share) {
       try {
-        await navigator.share({ title, url }); // Use await
+        await navigator.share({ title, url });
         console.log("Content shared successfully");
-      } catch (error) {
+      } catch (error: any) {
+        // Type 'any' for the error, as its structure varies
         console.error("Error sharing content:", error);
-        try {
-          await navigator.clipboard.writeText(url);
-          alert("Link copied to clipboard!");
-        } catch (clipError) {
-          console.error("Error copying to clipboard:", clipError);
-          alert("Could not share or copy link.");
+        if (error.name !== "AbortError") {
+          console.error("Share failed:", error);
+          alert("Sharing failed. Please try again.");
         }
       }
     } else {
-      try {
-        await navigator.clipboard.writeText(url); // Use await
-        alert(
-          "Link copied! Paste it anywhere to share. In-app browser doesn't directly support sharing."
-        );
-      } catch (error) {
-        console.error("Error copying to clipboard:", error);
-        alert("Could not copy link.");
-      }
+      console.log("Native share sheet should handle sharing.");
     }
   };
 
