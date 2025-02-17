@@ -1,45 +1,68 @@
-import { useState, useEffect, lazy, Suspense } from "react";
+// App.tsx
+import { useState, useEffect, lazy, Suspense } from "react"; // Remove React import
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap-icons/font/bootstrap-icons.css";
 import "./index.css";
 
 const EbookDownload = lazy(() => import("./components/EbookDownload"));
 
+const isAppBrowser = (() => {
+  if (typeof window === "undefined" || typeof navigator === "undefined") {
+    //For server side
+    return false;
+  }
+  const userAgent =
+    navigator.userAgent || (navigator as any).vendor || (window as any).opera;
+  return (
+    userAgent.includes("Instagram") ||
+    userAgent.includes("Threads") ||
+    userAgent.includes("FB")
+  );
+})();
+
 export default function App() {
-  const [theme, setTheme] = useState(() => {
-    return localStorage.getItem("theme") || "light";
-  });
+  const [theme, setTheme] = useState("light"); // Initial state
+
+  useEffect(() => {
+    const savedTheme = localStorage.getItem("theme") || "light";
+    setTheme(savedTheme);
+  }, []); // Empty dependency array: runs only once after mount
 
   useEffect(() => {
     document.documentElement.setAttribute("data-theme", theme);
     localStorage.setItem("theme", theme);
-  }, [theme]);
+  }, [theme]); // This effect runs whenever 'theme' changes
 
   const toggleTheme = () => {
-    const newTheme = theme === "light" ? "dark" : "light";
-    setTheme(newTheme);
+    setTheme((prevTheme) => (prevTheme === "light" ? "dark" : "light")); // Use functional update
   };
 
-  const isAppBrowser = () => {
-    const userAgent = navigator.userAgent || navigator.vendor;
-    return (
-      userAgent.includes("Instagram") ||
-      userAgent.includes("Threads") ||
-      userAgent.includes("FB")
-    );
-  };
-
-  const handleShare = (title: string, url: string): void => {
-    if (!isAppBrowser() && navigator.share) {
-      navigator
-        .share({ title, url })
-        .then(() => console.log("Content shared successfully"))
-        .catch((error) => console.error("Error sharing content:", error));
+  const handleShare = async (title: string, url: string): Promise<void> => {
+    // Make it async
+    if (!isAppBrowser && navigator.share) {
+      try {
+        await navigator.share({ title, url }); // Use await
+        console.log("Content shared successfully");
+      } catch (error) {
+        console.error("Error sharing content:", error);
+        try {
+          await navigator.clipboard.writeText(url);
+          alert("Link copied to clipboard!");
+        } catch (clipError) {
+          console.error("Error copying to clipboard:", clipError);
+          alert("Could not share or copy link.");
+        }
+      }
     } else {
-      navigator.clipboard.writeText(url);
-      alert(
-        "Link copied! Paste it anywhere to share. In-app browser doesn't directly support sharing."
-      );
+      try {
+        await navigator.clipboard.writeText(url); // Use await
+        alert(
+          "Link copied! Paste it anywhere to share. In-app browser doesn't directly support sharing."
+        );
+      } catch (error) {
+        console.error("Error copying to clipboard:", error);
+        alert("Could not copy link.");
+      }
     }
   };
 
@@ -66,13 +89,9 @@ export default function App() {
             loading="lazy"
           />
           <h1 className="profile-username">aitrends.now</h1>
-          <Suspense
-            fallback={<p className="profile-description">Loading profile...</p>}
-          >
-            <p className="profile-description">
-              Tech enthusiast. Follow for updates & a shared love for tech.
-            </p>
-          </Suspense>
+          <p className="profile-description">
+            Tech enthusiast. Follow for updates & a shared love for tech.
+          </p>
         </div>
 
         <div className="links-section">
@@ -182,8 +201,10 @@ export default function App() {
               ⋮
             </span>
 
-            {/* Include the EbookDownload component */}
-            <EbookDownload />
+            {/* Wrap EbookDownload with Suspense */}
+            <Suspense fallback={<div>Loading...</div>}>
+              <EbookDownload />
+            </Suspense>
           </div>
 
           <div className="link-card special">
